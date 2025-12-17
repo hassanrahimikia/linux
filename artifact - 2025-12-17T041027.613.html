@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درسنامه جامع آزمایشگاه سیستم عامل</title>
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #334155;
+            --bg-color: #f8fafc;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --warning-bg: #fff7ed;
+            --warning-border: #f97316;
+            --info-bg: #eff6ff;
+            --info-border: #3b82f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tahoma', 'Segoe UI', Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: var(--sidebar-width);
+            background-color: #fff;
+            border-left: 1px solid #e2e8f0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            right: 0;
+            top: 0;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        nav h3 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 12px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background-color: var(--info-bg);
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            margin-right: var(--sidebar-width);
+            padding: 40px 60px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #475569;
+            margin: 25px 0 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 15px 0;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        code {
+            background-color: #f1f5f9;
+            color: #d63384;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: right;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--secondary-color);
+        }
+
+        /* Infoboxes */
+        .box {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .info {
+            background-color: var(--info-bg);
+            border-right: 4px solid var(--info-border);
+        }
+
+        .warning {
+            background-color: var(--warning-bg);
+            border-right: 4px solid var(--warning-border);
+        }
+
+        .key-concept {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            main { margin-right: 0; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h3>فهرست مطالب</h3>
+    <ul>
+        <li><a href="#intro">۱. مفاهیم اولیه و ساختار فایل</a></li>
+        <li><a href="#nav">۲. ناوبری و جابجایی (cd, pwd)</a></li>
+        <li><a href="#file-mgmt">۳. مدیریت فایل و پوشه</a></li>
+        <li><a href="#listing">۴. مشاهده محتویات (ls)</a></li>
+        <li><a href="#content">۵. کار با متن (cat, echo, nano)</a></li>
+        <li><a href="#processing">۶. پردازش متن (Pipes, wc, sort)</a></li>
+        <li><a href="#permissions">۷. سطح دسترسی (Permissions)</a></li>
+        <li><a href="#users">۸. مدیریت کاربران و سیستم</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h1>درسنامه جامع آزمایشگاه سیستم عامل</h1>
+    <div class="box info">
+        این درسنامه بر اساس دستورات تدریس شده در کلاس تهیه شده و با توضیحات فنی تکمیلی، برای درک عمیق‌تر مفاهیم لینوکس بسط داده شده است.
+    </div>
+
+    <!-- Section 1 -->
+    <section id="intro">
+        <h2>۱. مفاهیم اولیه و ساختار فایل در لینوکس</h2>
+        <p>برخلاف ویندوز که درایوهای مختلفی مثل C و D دارد، لینوکس دارای یک ساختار درختی واحد است که همه چیز از یک نقطه شروع می‌شود.</p>
+        
+        <h3>ریشه (Root /)</h3>
+        <p>بالاترین سطح در سیستم فایل لینوکس است. تمام فایل‌ها و پوشه‌ها زیرمجموعه <code>/</code> هستند.</p>
+        
+        <h3>پوشه خانه (Home Directory ~)</h3>
+        <p>هر کاربر در لینوکس یک فضای شخصی دارد. مسیر آن معمولاً <code>/home/username</code> است. علامت <code>~</code> (تیلدا) میانبری برای اشاره به این مسیر است.</p>
+        
+        <div class="box info">
+            <strong>نکته مهم:</strong> لینوکس به بزرگی و کوچکی حروف حساس است (Case Sensitive). فایل <code>Salam.txt</code> با <code>salam.txt</code> متفاوت است.
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="nav">
+        <h2>۲. ناوبری و جابجایی در ترمینال</h2>
+        <p>برای حرکت در بین پوشه‌ها از دستورات زیر استفاده می‌شود:</p>
+
+        <h3>یافتن موقعیت فعلی (pwd)</h3>
+        <p>دستور <code>pwd</code> مخفف <strong>Print Working Directory</strong> است و مسیری که هم‌اکنون در آن هستید را چاپ می‌کند.</p>
+
+        <h3>تغییر مسیر (cd)</h3>
+        <p>دستور <code>cd</code> مخفف <strong>Change Directory</strong> است.</p>
+        
+        <table>
+            <tr>
+                <th>دستور</th>
+                <th>عملکرد</th>
+                <th>توضیح فنی</th>
+            </tr>
+            <tr>
+                <td><code>cd /</code></td>
+                <td>رفتن به ریشه</td>
+                <td>خروج از تمام پوشه‌ها و رفتن به ابتدای درخت فایل.</td>
+            </tr>
+            <tr>
+                <td><code>cd ~</code> یا <code>cd</code></td>
+                <td>رفتن به خانه</td>
+                <td>رفتن سریع به پوشه شخصی کاربر جاری.</td>
+            </tr>
+            <tr>
+                <td><code>cd test</code></td>
+                <td>رفتن به جلو</td>
+                <td>وارد شدن به پوشه test (مسیر نسبی).</td>
+            </tr>
+            <tr>
+                <td><code>cd ..</code></td>
+                <td>یک مرحله عقب</td>
+                <td>رفتن به پوشه والد (Parent Directory).</td>
+            </tr>
+            <tr>
+                <td><code>cd ../..</code></td>
+                <td>دو مرحله عقب</td>
+                <td>رفتن به پدربزرگ پوشه فعلی!</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="file-mgmt">
+        <h2>۳. مدیریت فایل‌ها و پوشه‌ها</h2>
+
+        <h3>ساخت پوشه (mkdir)</h3>
+        <p>دستور <code>mkdir</code> (Make Directory) برای ساخت پوشه است.</p>
+        <pre>
+mkdir foldername           # ساخت پوشه ساده
+mkdir -p test/dir2/dir3    # ساخت پوشه تودرتو (Parent Flag)</pre>
+        <p>سوئیچ <code>-p</code> بسیار مهم است؛ اگر پوشه‌های <code>test</code> و <code>dir2</code> وجود نداشته باشند، آن‌ها را هم می‌سازد تا خطا ندهد.</p>
+
+        <h3>ساخت فایل (touch)</h3>
+        <p>دستور <code>touch</code> یک فایل خالی با حجم صفر ایجاد می‌کند. اگر فایل وجود داشته باشد، تاریخ ویرایش آن را بروز می‌کند.</p>
+        <pre>touch Salam.txt</pre>
+
+        <h3>جابجایی و تغییر نام (mv)</h3>
+        <p>در لینوکس دستور <code>mv</code> (Move) هم برای جابجایی و هم برای تغییر نام استفاده می‌شود.</p>
+        <pre>mv Salam.txt dir2/name.txt</pre>
+        <p>در مثال بالا، فایل <code>Salam.txt</code> به داخل پوشه <code>dir2</code> می‌رود و همزمان نامش به <code>name.txt</code> تغییر می‌کند.</p>
+
+        <h3>حذف کردن (rm)</h3>
+        <div class="box warning">
+            <strong>خطر:</strong> حذف در لینوکس سطل آشغال (Recycle Bin) ندارد. دستورات زیر را با احتیاط بزنید.
+        </div>
+        <pre>
+rm filename.txt     # حذف فایل
+rm -r foldername    # حذف پوشه (Recursive)
+rm -rf dir2         # حذف پوشه با زور (Force) بدون سوال پرسیدن</pre>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="listing">
+        <h2>۴. مشاهده محتویات (List)</h2>
+        <p>دستور <code>ls</code> پرکاربردترین دستور برای دیدن فایل‌هاست. ترکیب سوئیچ‌ها قدرت آن را زیاد می‌کند.</p>
+
+        <h3>تحلیل سوئیچ‌ها</h3>
+        <ul>
+            <li><code>-l</code> (Long): نمایش جزئیات کامل (مجوزها، مالک، حجم، تاریخ).</li>
+            <li><code>-a</code> (All): نمایش فایل‌های مخفی (فایل‌هایی که نامشان با <code>.</code> شروع می‌شود).</li>
+            <li><code>-h</code> (Human-readable): نمایش حجم فایل‌ها به صورت KB و MB به جای بایت.</li>
+        </ul>
+
+        <pre>ls -lah</pre>
+
+        <h3>تحلیل خروجی ls -l</h3>
+        <p>وقتی <code>ls -l</code> می‌زنید، خروجی شبیه زیر است:</p>
+        <pre>drwxr-xr-x  2 root root 4096 Dec 17 10:00 foldername</pre>
+        <p>تفسیر ستون‌ها:</p>
+        <ol>
+            <li><strong>کاراکتر اول:</strong> نوع فایل (<code>d</code> یعنی دایرکتوری/پوشه، <code>-</code> یعنی فایل).</li>
+            <li><strong>۹ کاراکتر بعدی:</strong> سطح دسترسی‌ها (rwx).</li>
+            <li><strong>root اول:</strong> نام کاربری مالک فایل (Owner).</li>
+            <li><strong>root دوم:</strong> نام گروه مالک فایل (Group).</li>
+            <li><strong>4096:</strong> حجم فایل (بایت).</li>
+        </ol>
+
+        <h3>دستور Tree</h3>
+        <p>برای دیدن ساختار درختی فایل‌ها (نیاز به نصب: <code>sudo apt install tree</code>):</p>
+        <pre>tree</pre>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="content">
+        <h2>۵. خواندن و نوشتن در فایل‌ها</h2>
+
+        <h3>چاپ و تغییر مسیر خروجی (Redirection)</h3>
+        <p>دستور <code>echo</code> متنی را در خروجی چاپ می‌کند. با استفاده از <code>></code> می‌توان خروجی را به یک فایل فرستاد.</p>
+        
+        <pre>
+echo "salam" > hello.txt    # نوشتن (Overwrite) - محتوای قبلی پاک می‌شود
+echo "salam" >> hello.txt   # الحاق (Append) - به انتهای فایل اضافه می‌شود</pre>
+
+        <h3>مشاهده محتوا (cat)</h3>
+        <p>دستور <code>cat</code> (Concatenate) تمام محتوای فایل را در ترمینال چاپ می‌کند.</p>
+        <pre>cat hello.txt</pre>
+
+        <h3>ویرایشگرهای متن</h3>
+        <ul>
+            <li><strong>Nano:</strong> ویرایشگر ساده. با <code>Ctrl+O</code> ذخیره و با <code>Ctrl+X</code> خارج شوید.</li>
+            <li><strong>Vim:</strong> ویرایشگر حرفه‌ای و مودال.</li>
+        </ul>
+        <div class="box info">
+            <strong>کلیدهای حیاتی Vim:</strong><br>
+            1. زدن <code>i</code> برای ورود به حالت نوشتن (Insert Mode).<br>
+            2. زدن <code>Esc</code> برای خروج از حالت نوشتن.<br>
+            3. تایپ <code>:wq</code> برای ذخیره و خروج.<br>
+            4. تایپ <code>:q!</code> برای خروج بدون ذخیره.
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="processing">
+        <h2>۶. پردازش متن و مفهوم پایپ (|)</h2>
+        <p>علامت <code>|</code> (Pipe) خروجی دستور سمت چپ را به عنوان ورودی به دستور سمت راست می‌دهد.</p>
+
+        <h3>شمارش (wc)</h3>
+        <p>مخفف Word Count است.</p>
+        <ul>
+            <li><code>wc -l</code>: تعداد خطوط (Lines).</li>
+            <li><code>wc -w</code>: تعداد کلمات (Words).</li>
+            <li><code>wc -c</code>: تعداد کاراکترها (Characters).</li>
+            <li><code>wc -L</code>: طولانی‌ترین خط.</li>
+        </ul>
+
+        <h3>مرتب‌سازی و یکتاسازی</h3>
+        <pre>
+sort file.txt           # مرتب‌سازی الفبایی
+uniq file.txt           # حذف تکراری‌های پشت‌سرهم</pre>
+        
+        <p>دستور <code>uniq</code> فقط خطوط تکراری که <strong>کنار هم</strong> باشند را یکی می‌کند. بنابراین معمولاً با <code>sort</code> ترکیب می‌شود:</p>
+        <pre>cat salam.txt | sort | uniq</pre>
+        <p>این دستور ابتدا فایل را می‌خواند، سپس مرتب می‌کند تا تکراری‌ها کنار هم قرار گیرند، و در نهایت یکتا می‌کند.</p>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="permissions">
+        <h2>۷. سطح دسترسی‌ها (Permissions) - مبحث مهم</h2>
+        <p>امنیت لینوکس بر اساس مجوزهای دسترسی به فایل‌ها بنا شده است. سه نوع دسترسی وجود دارد:</p>
+        
+        <table>
+            <tr>
+                <th>نوع دسترسی</th>
+                <th>حرف اختصاری</th>
+                <th>ارزش عددی (وزن)</th>
+                <th>توضیح</th>
+            </tr>
+            <tr>
+                <td>Read (خواندن)</td>
+                <td>r</td>
+                <td><strong>4</strong></td>
+                <td>دیدن محتویات فایل یا لیست گرفتن از پوشه</td>
+            </tr>
+            <tr>
+                <td>Write (نوشتن)</td>
+                <td>w</td>
+                <td><strong>2</strong></td>
+                <td>تغییر محتویات فایل یا ساخت/حذف فایل در پوشه</td>
+            </tr>
+            <tr>
+                <td>Execute (اجرا)</td>
+                <td>x</td>
+                <td><strong>1</strong></td>
+                <td>اجرای فایل برنامه‌نویسی یا ورود به پوشه (cd)</td>
+            </tr>
+        </table>
+
+        <h3>محاسبه عدد دسترسی (chmod)</h3>
+        <p>مجوزها برای سه گروه تعریف می‌شوند: <strong>Owner</strong> (مالک)، <strong>Group</strong> (هم‌گروهی‌ها)، <strong>Others</strong> (بقیه).</p>
+        <p>مثال: دستور <code>chmod 744 myfile</code></p>
+        <ul>
+            <li>رقم اول (7): مربوط به مالک (4+2+1 = rwx) -> همه کار می‌تواند بکند.</li>
+            <li>رقم دوم (4): مربوط به گروه (4 = r--) -> فقط می‌تواند بخواند.</li>
+            <li>رقم سوم (4): مربوط به بقیه (4 = r--) -> فقط می‌توانند بخوانند.</li>
+        </ul>
+
+        <pre>
+sudo chmod 777 file     # دسترسی کامل به همه (خطرناک)
+sudo chmod -R 755 dir   # تغییر دسترسی پوشه و تمام زیرمجموعه‌هایش (-R)</pre>
+    </section>
+
+    <!-- Section 8 -->
+    <section id="users">
+        <h2>۸. مدیریت کاربران و سیستم</h2>
+
+        <h3>کاربر ریشه (Root) و دستور sudo</h3>
+        <p>کاربر Root مدیر کل سیستم است و هیچ محدودیتی ندارد. برای انجام کارهای مدیریتی (نصب برنامه، تغییر فایل‌های سیستمی) باید از <code>sudo</code> (SuperUser Do) قبل از دستور استفاده کنید.</p>
+        <ul>
+            <li><code>sudo -i</code>: لاگین دائم به عنوان ریشه.</li>
+            <li><code>exit</code>: خروج از حالت ریشه.</li>
+        </ul>
+
+        <h3>مدیریت پکیج‌ها (APT)</h3>
+        <p>در سیستم‌های مبتنی بر دبیان/اوبونتو، <code>apt</code> مدیر نصب برنامه است.</p>
+        <pre>
+sudo apt update         # بروزرسانی لیست نرم‌افزارها از اینترنت
+sudo apt install tree   # دانلود و نصب برنامه tree</pre>
+
+        <h3>فایل‌های مهم سیستمی</h3>
+        <ul>
+            <li><code>/etc/passwd</code>: فایلی متنی که لیست تمام کاربران و مسیر خانه‌شان در آن است.</li>
+            <li><code>/etc</code>: پوشه‌ای که تنظیمات کل سیستم در آن قرار دارد.</li>
+        </ul>
+
+        <h3>دستورات شبکه و دیسک</h3>
+        <ul>
+            <li><code>ip a</code> یا <code>ifconfig</code>: مشاهده IP و کارت‌های شبکه.</li>
+            <li><code>df -h</code>: مشاهده فضای خالی هارد دیسک (Disk Free).</li>
+        </ul>
+        
+        <div class="box warning">
+            <strong>نکته پیشرفته درباره sudo و redirect:</strong><br>
+            دستور <code>sudo echo "hi" > /root/file.txt</code> کار نمی‌کند. چون عمل <code>></code> توسط پوسته کاربر عادی انجام می‌شود، نه سودو.<br>
+            راه حل: <code>sudo sh -c "echo 'hi' > /root/file.txt"</code>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
